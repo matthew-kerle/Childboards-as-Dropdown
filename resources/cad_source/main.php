@@ -4,9 +4,9 @@
  *
  * @file ./cad_source/main.php
  * @author Labradoodle-360
- * @copyright Matthew Kerle 2012
+ * @copyright Matthew Kerle 2012-2013
  *
- * @version 2.0.3
+ * @version 2.0.4
  */
 
 if (!defined('SMF'))

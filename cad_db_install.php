@@ -4,9 +4,9 @@
  *
  * @file cad_install.php
  * @author Labradoodle-360
- * @copyright Matthew Kerle 2012
+ * @copyright Matthew Kerle 2012-2013
  *
- * @version 2.0.3
+ * @version 2.0.4
  */
  
 // Using SSI?
@@ -16,7 +16,11 @@ elseif (!defined('SMF'))
 	die('<strong>Error:</strong> Cannot install - please make sure that this file in the same directory as SMF\'s SSI.php file.');
 
 // $smcFunc is necessary.
-global $smcFunc;
+global $smcFunc, $user_info;
+
+// One final security check.
+if (!$user_info['is_admin'])
+	die('<strong>Error:</strong> Only forum administrators are able to execute this file.');
 
 // Our variables & values.
 $final_array = array(

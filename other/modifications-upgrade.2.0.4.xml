@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	<id>Labradoodle-360:childboards-as-dropdown</id>
+	<version>2.0.4</version>
+	<file name="$sourcedir/cad_source/resources/hooks.php">
+		<operation>
+			<search position="before"><![CDATA[
+	$context['html_headers'] .= "\n" . '
+]]></search>
+			<add><![CDATA[
+		<link rel="stylesheet" type="text/css" href="' . $settings['default_theme_url'] . '/css/cad_css/main.css" />
+]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[
+			'force_div_id' => 'lab360_childboard_strict',
+			'javascript' => ' style="padding: 4px;"' # Sorry SMF, you didn't leave me any other option.
+]]></search>
+			<add><![CDATA[
+			'force_div_id' => 'lab360_childboard_strict'
+]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[
+			'lab360_copyright',
+			'name' => 'lab360_childboard_copyright" class="smalltext" style="color: #404040;' # Once again, no choice. This line is only here to hack the class.
+]]></search>
+			<add><![CDATA[
+			'lab360_copyright'
+]]></add>
+		</operation>
+	</file>
+</modification>

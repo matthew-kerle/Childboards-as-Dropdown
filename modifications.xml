@@ -2,7 +2,7 @@
 <!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 	<id>Labradoodle-360:childboards-as-dropdown</id>
-	<version>2.0.3</version>
+	<version>2.0.4</version>
 	<file name="$sourcedir/Load.php">
 		<operation>
 			<search position="before"><![CDATA[
@@ -10,7 +10,7 @@
 ]]></search>
 			<add><![CDATA[
 	//-- Labradoodle-360; Childboards as Dropdown
-	if ((empty($context['current_action']) || !empty($context['current_action']) && ($context['current_action'] === 'forum' || $_GET['action'] == 'collapse') && empty($_GET['topic'])))
+	if ((empty($context['current_action']) || !empty($context['current_action']) && in_array($_GET['action'], array('forum', 'tpmod', 'collapse')) && empty($_GET['topic'])))
 	{
 		require_once($sourcedir . '/cad_source/main.php');
 		loadChildboards_as_Dropdown();
@@ -41,8 +41,8 @@
 									<form action="', $scripturl, '?" method="get">
 										<strong>', $txt['parent_boards'], ':</strong>&nbsp;
 										<select name="board" id="board" onchange="javascript:jsRedirect(this);">
-											<option value="">', $txt['lab360_select_child'], '</option>
-											<optgroup label="', $txt['lab360_board_children'], ':">';
+											<option value="">', $txt['lab360_cad']['select_child'], '</option>
+											<optgroup label="', $txt['lab360_cad']['board_children'], ':">';
 											foreach ($board['children'] as $key => $value)
 											{
 												echo '<option value="', $key, '">', $value['name'], $value['new'] ? '&#42;' : '', '</option>';
@@ -50,7 +50,7 @@
 											echo '</optgroup>
 										</select>
 										<noscript>
-											<input type="submit" value="', $txt['lab360_go'], '" class="button_submit" />
+											<input type="submit" value="', $txt['lab360_cad']['go'], '" class="button_submit" />
 										</noscript>
 									</form>
 								</td>
@@ -89,8 +89,8 @@
 								<form action="', $scripturl, '?" method="get">
 									<strong>', $txt['parent_boards'], ':</strong>&nbsp;
 									<select name="board" id="board" onchange="javascript:jsRedirect(this);">
-										<option value="">', $txt['lab360_select_child'], '</option>
-										<optgroup label="', $txt['lab360_board_children'], ':">';
+										<option value="">', $txt['lab360_cad']['select_child'], '</option>
+										<optgroup label="', $txt['lab360_cad']['board_children'], ':">';
 										foreach ($board['children'] as $key => $value)
 										{
 											echo '<option value="', $key, '">', $value['name'], $value['new'] ? '&#42;' : '', '</option>';
@@ -98,7 +98,7 @@
 										echo '</optgroup>
 									</select>
 									<noscript>
-										<input type="submit" value="', $txt['lab360_go'], '" class="button_submit" />
+										<input type="submit" value="', $txt['lab360_cad']['go'], '" class="button_submit" />
 									</noscript>
 								</form>
 							</td>

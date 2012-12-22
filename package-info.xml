@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	Package manifest file for Childboards as Dropdown 2.0.2
+	Package manifest file for Childboards as Dropdown 2.0.4
 
 	ATTENTION: If you are trying to install this manually, you should try
 	the package manager.  If it will not work for you, please take a look
@@ -12,7 +12,7 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<name>Childboards as Dropdown</name>
 	<id>Labradoodle-360:childboards-as-dropdown</id>
-	<version>2.0.3</version>
+	<version>2.0.4</version>
 	<type>modification</type>
 	<!-- !! INSTALLS !! -->
 	<install for="2.0 - 2.0.99">
@@ -20,6 +20,8 @@
 		<modification>modifications.xml</modification>
 		<!-- Require Dir: cad_source -->
 		<require-dir name="/resources/cad_source" destination="$sourcedir" />
+		<!-- Require Dir; cad_css -->
+		<require-dir name="/resources/cad_css" destination="$themedir/css" />
 		<!-- Require Dir: cad_language -->
 		<require-dir name="/resources/cad_language" destination="$languagedir" />
 		<!-- Add: Hooks -->
@@ -35,6 +37,8 @@
 		<modification reverse="true">modifications.xml</modification>
 		<!-- Remove Dir: cad_source -->
 		<remove-dir name="$sourcedir/cad_source" />
+		<!-- Remove Dir: cad_css -->
+		<remove-dir name="$themedir/cad_css" />
 		<!-- Remove Dir: lm_language -->
 		<remove-dir name="$languagedir/cad_language" />
 		<!-- Remove: Hooks -->
@@ -45,8 +49,4 @@
 		<redirect url="?action=admin;area=packages;sa=browse" />
 	</uninstall>
 	<!-- !! UPGRADES !! -->
-	<upgrade from="2.0.2" to="2.0.3">
-		<modification>modifications-upgrade.xml</modification>
-		<redirect url="?action=admin;area=modsettings;sa=general" />
-	</upgrade>
 </package-info>

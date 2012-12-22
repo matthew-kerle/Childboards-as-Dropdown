@@ -4,9 +4,9 @@
  *
  * @file cad_ihooks.php
  * @author Labradoodle-360
- * @copyright Matthew Kerle 2012
+ * @copyright Matthew Kerle 2012-2013
  *
- * @version 2.0.3
+ * @version 2.0.4
  */
  
 // Using SSI?
@@ -14,6 +14,11 @@ if (file_exists(dirname(__FILE__) . '/SSI.php') && !defined('SMF'))
 	require_once(dirname(__FILE__) . '/SSI.php');
 elseif (!defined('SMF'))
 	die('<strong>Error:</strong> Cannot install - please make sure that this file in the same directory as SMF\'s SSI.php file.');
+
+// One final security check.
+global $user_info;
+if (!$user_info['is_admin'])
+	die('<strong>Error:</strong> Only forum administrators are able to execute this file.');
 
 // Array of Hooks.
 $hooks = array(
@@ -39,4 +44,4 @@ foreach ($hooks as $key => $value)
 
 // And, we're done!
 if (SMF == 'SSI')
-	echo 'h00ks Successfully Added!';
+	echo 'Hooks Successfully Added!';

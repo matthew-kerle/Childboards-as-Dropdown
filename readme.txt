@@ -7,6 +7,8 @@ You can enable or disable this modification from the admin panel.  In addition, 
 As of version 2.0.0, the modification was completely re-written, functions with JavaScript disabled, and covers both the BoardIndex, and the MessageIndex.
 
 The original version of this modification was written by [url=http://www.simplemachines.org/community/index.php?action=profile;u=122766]Rumbaar[/url].
+
+TinyPortal Bug Reported by: [url=http://www.simplemachines.org/community/index.php?action=profile;u=230574]teos55[/url].
 [hr]
 
 [size=13pt][b][color=#404040]Features:[/color][/b][/size]
@@ -18,6 +20,10 @@ The original version of this modification was written by [url=http://www.simplem
 
 [size=13pt][b][color=#404040]Changelog:[/color][/b][/size]
 [hr]
+[b][color=#404040]v2.0.4 (r12.22.12):[/color][/b]
+- Many improvements.
+- TinyPortal Compatibility Bugfix.
+
 [b][color=#404040]v2.0.3 (r3.19.12):[/color][/b]
 [list]
 [li]! bugfix: modification breaks when collapsing categories, and throws undefined errors. (!~./modifications.xml)[/li]
@@ -45,7 +51,7 @@ The original version of this modification was written by [url=http://www.simplem
 [size=13pt][b][color=#404040]Mentions:[/color][/b][/size]
 [hr]
 [list]
-[li]Version: 2.0.3[/li]
+[li]Version: 2.0.4[/li]
 [li]Written by: Labradoodle-360[/li]
 [li]Copyright: Matthew Kerle - All Rights Reserved[/li]
 [li]Dedicated To: LILM, my family, and Scotty Christianson.[/li]

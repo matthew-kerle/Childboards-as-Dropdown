@@ -4,9 +4,9 @@
  *
  * @file ./cad_source/resources/hooks.php
  * @author Labradoodle-360
- * @copyright Matthew Kerle 2012
+ * @copyright Matthew Kerle 2012-2013
  *
- * @version 2.0.3
+ * @version 2.0.4
  */
  
 if (!defined('SMF'))
@@ -23,13 +23,14 @@ function hook__cad_modsettings(&$config_vars)
 {
 
 	// Our Global Variables.
-	global $context, $txt;
+	global $context, $txt, $settings;
 
 	// Load The Language.
 	loadLanguage('cad_language/main');
 
 	// The <head> content.
 	$context['html_headers'] .= "\n" . '
+		<link rel="stylesheet" type="text/css" href="' . $settings['default_theme_url'] . '/css/cad_css/main.css" />
 		<script type="text/javascript">
 			//<![CDATA[
 			if (!window.jQuery)
@@ -38,9 +39,10 @@ function hook__cad_modsettings(&$config_vars)
 		</script>
 		<script type="text/javascript">
 			//<![CDATA[
-			$(document).ready(function() {
+			jQuery(document).ready(function($) {
 				var loaded_childboard_attr = $("#lab360_childboard_dropdown").attr("checked");
 				if (loaded_childboard_attr == "checked") {
+					// Nothing...
 				}
 				else {
 					$("#lab360_childboard_strict").slideUp("slow");
@@ -79,17 +81,14 @@ function hook__cad_modsettings(&$config_vars)
 		array(
 			'int', 
 			'lab360_childboard_limit',
-			'subtext' => $txt['lab360_childboard_limit_desc'],
-			'force_div_id' => 'lab360_childboard_strict',
-			'javascript' => ' style="padding: 4px;"' # Sorry SMF, you didn't leave me any other option.
+			'subtext' => $txt['lab360_cad']['childboard_limit_desc'],
+			'force_div_id' => 'lab360_childboard_strict'
 		),
 		array(
 			'var_message',
-			'lab360_copyright',
-			'name' => 'lab360_childboard_copyright" class="smalltext" style="color: #404040;' # Once again, no choice. This line is only here to hack the class.
+			'lab360_copyright'
 		)
 	);
 	foreach ($cad_settings as $key => $value)
 		$config_vars[] = $value;
-
 }

@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	<id>Labradoodle-360:childboards-as-dropdown</id>
+	<version>2.0.3</version>
+	<file name="$sourcedir/Load.php">
+		<operation>
+			<search position="before"><![CDATA[
+	detectBrowser();
+]]></search>
+			<add><![CDATA[
+	//-- Labradoodle-360; Childboards as Dropdown
+	if ((empty($context['current_action']) || !empty($context['current_action']) && ($context['current_action'] === 'forum' || $_GET['action'] == 'collapse') && empty($_GET['topic'])))
+	{
+		require_once($sourcedir . '/cad_source/main.php');
+		loadChildboards_as_Dropdown();
+	}
+	// End Labradoodle-360; Childboards as Dropdown --//
+]]></add>
+		</operation>
+	</file>
+	<file name="$themedir/BoardIndex.template.php">
+		<operation>
+			<search position="replace"><![CDATA[
+					echo '
+					<tr id="board_', $board['id'], '_children">
+						<td colspan="3" class="children windowbg">
+							<strong>', $txt['parent_boards'], '</strong>: ', implode(', ', $children), '
+						</td>
+					</tr>';
+]]></search>
+			<add><![CDATA[
+					//-- Labradoodle-360; Childboards as Dropdown
+					global $modSettings;
+					if (!empty($modSettings['lab360_childboard_dropdown']) && (isset($modSettings['lab360_childboard_limit']) && ($modSettings['lab360_childboard_limit'] == 0 || count(array_keys($board['children'])) > $modSettings['lab360_childboard_limit']) || !isset($modSettings['lab360_childboard_limit'])))
+					{
+						unset($children);
+						echo '
+							<tr id="board_', $board['id'], '_children">
+								<td colspan="3" class="children windowbg">
+									<form action="', $scripturl, '?" method="get">
+										<strong>', $txt['parent_boards'], ':</strong>&nbsp;
+										<select name="board" id="board" onchange="javascript:jsRedirect(this);">
+											<option value="">', $txt['lab360_select_child'], '</option>
+											<optgroup label="', $txt['lab360_board_children'], ':">';
+											foreach ($board['children'] as $key => $value)
+											{
+												echo '<option value="', $key, '">', $value['name'], $value['new'] ? '&#42;' : '', '</option>';
+											}
+											echo '</optgroup>
+										</select>
+										<noscript>
+											<input type="submit" value="', $txt['lab360_go'], '" class="button_submit" />
+										</noscript>
+									</form>
+								</td>
+							</tr>
+						';
+					}
+					else
+					{
+						echo '
+							<tr id="board_', $board['id'], '_children">
+								<td colspan="3" class="children windowbg">
+									<strong>', $txt['parent_boards'], ':</strong> ', implode(', ', $children), '
+								</td>
+							</tr>
+						';
+					}
+					// End Labradoodle-360; Childboards as Dropdown --//
+]]></add>
+		</operation>
+	</file>
+	<file name="$themedir/MessageIndex.template.php">
+		<operation>
+			<search position="replace"><![CDATA[
+				echo '
+				<tr id="board_', $board['id'], '_children"><td colspan="3" class="children windowbg"><strong>', $txt['parent_boards'], '</strong>: ', implode(', ', $children), '</td></tr>';
+]]></search>
+			<add><![CDATA[
+				//-- Labradoodle-360; Childboards as Dropdown
+				global $modSettings;
+				if (!empty($modSettings['lab360_childboard_dropdown']) && (isset($modSettings['lab360_childboard_limit']) && ($modSettings['lab360_childboard_limit'] == 0 || count(array_keys($board['children'])) > $modSettings['lab360_childboard_limit']) || !isset($modSettings['lab360_childboard_limit'])))
+				{
+					unset($children);
+					echo '
+						<tr id="board_', $board['id'], '_children">
+							<td colspan="3" class="children windowbg">
+								<form action="', $scripturl, '?" method="get">
+									<strong>', $txt['parent_boards'], ':</strong>&nbsp;
+									<select name="board" id="board" onchange="javascript:jsRedirect(this);">
+										<option value="">', $txt['lab360_select_child'], '</option>
+										<optgroup label="', $txt['lab360_board_children'], ':">';
+										foreach ($board['children'] as $key => $value)
+										{
+											echo '<option value="', $key, '">', $value['name'], $value['new'] ? '&#42;' : '', '</option>';
+										}
+										echo '</optgroup>
+									</select>
+									<noscript>
+										<input type="submit" value="', $txt['lab360_go'], '" class="button_submit" />
+									</noscript>
+								</form>
+							</td>
+						</tr>
+					';
+				}
+				else
+				{
+					echo '
+						<tr id="board_', $board['id'], '_children">
+							<td colspan="3" class="children windowbg">
+								<strong>', $txt['parent_boards'], ':</strong> ', implode(', ', $children), '
+							</td>
+						</tr>
+					';
+				}
+				// End Labradoodle-360; Childboards as Dropdown --//
+]]></add>
+		</operation>
+	</file>
+</modification>

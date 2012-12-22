@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	Package manifest file for Childboards as Dropdown 2.0.2
+
+	ATTENTION: If you are trying to install this manually, you should try
+	the package manager.  If it will not work for you, please take a look
+	at the following for information on this format:
+		http://mods.simplemachines.org/docs/manual-install.php
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<name>Childboards as Dropdown</name>
+	<id>Labradoodle-360:childboards-as-dropdown</id>
+	<version>2.0.3</version>
+	<type>modification</type>
+	<!-- !! INSTALLS !! -->
+	<install for="2.0 - 2.0.99">
+		<readme parsebbc="true">readme.txt</readme>
+		<modification>modifications.xml</modification>
+		<!-- Require Dir: cad_source -->
+		<require-dir name="/resources/cad_source" destination="$sourcedir" />
+		<!-- Require Dir: cad_language -->
+		<require-dir name="/resources/cad_language" destination="$languagedir" />
+		<!-- Add: Hooks -->
+		<code>cad_ihooks.php</code>
+		<!-- Add: Settings -->
+		<code>cad_db_install.php</code>
+		<!-- Redirect To: ?action=admin;area=modsettings;sa=general -->
+		<redirect url="?action=admin;area=modsettings;sa=general" />
+	</install>
+	<!-- !! UNINSTALLS !! -->
+	<uninstall for="2.0 - 2.0.99">
+		<readme parsebbc="true">readme.txt</readme>
+		<modification reverse="true">modifications.xml</modification>
+		<!-- Remove Dir: cad_source -->
+		<remove-dir name="$sourcedir/cad_source" />
+		<!-- Remove Dir: lm_language -->
+		<remove-dir name="$languagedir/cad_language" />
+		<!-- Remove: Hooks -->
+		<code>cad_uhooks.php</code>
+		<!-- Remove: Settings -->
+		<database>cad_db_uninstall.php</database>
+		<!-- Redirect To: ?action=admin;area=packages;sa=browse -->
+		<redirect url="?action=admin;area=packages;sa=browse" />
+	</uninstall>
+	<!-- !! UPGRADES !! -->
+	<upgrade from="2.0.2" to="2.0.3">
+		<modification>modifications-upgrade.xml</modification>
+		<redirect url="?action=admin;area=modsettings;sa=general" />
+	</upgrade>
+</package-info>
